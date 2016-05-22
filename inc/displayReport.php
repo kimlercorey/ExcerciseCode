@@ -3,49 +3,45 @@
 require_once 'inc/htmlgen.php';
 
 /**
- * @method void displayReport(array $data)
+ * @method String displayReport(array $data)
+ * 
+ * note:  $data input format expected is
+ * 
+ *		  array(n) { ["grantee_name"]=> array(n) { ["program_name"]=> float(x) }}
  */
 function displayReport(array $data)
 {
-    $total = array();
-    $program_names = array();
+
+    $total = $program_names = [];
     $header = $body = $footer = null;
 
     // Sort the data by alpha DESC on keyname
     ksort($data);
 
-    // Process each datum
-    foreach($data as $k => $values_arr) {
-        $line[] = $k;
+    // Process each grantee
+    foreach($data as $grantee => $programs) {
 
-        // total needs seperate processing
-        if ($k == "Total") {
-            $program_names = $values_arr;
-            array_push($total, $k);
-            foreach($values_arr as $key => $val) {
-                array_push($line, $val);
-            }
-
-            // Store total line in $total for processing later
-            $total[0] = $line[0];
-            $total[1] = $line[1];
-            $total[2] = $line[2];
-        }
-        else {
-            foreach($values_arr as $ke => $va) {
-                array_push($line, $va);
-            }
-
-            // send to html builder
-            $body.= tableBuilder($line[0], $line[1], $line[2]);
+    	$line = [];
+        $program_names = $programs; //i.e. store keys - "Find More Brains", "Drink More Water"
+    	
+    	// Process each program_name
+    	foreach($programs as $program_amount) {
+        	array_push($line, $program_amount);
         }
 
-        unset($line);
+        // Send each line to builder unless it is a total line item 
+        ($grantee != "Total") ? $body.= tableBuilder($grantee, $line[0], $line[1]) : $total = $line;
+        
     }
 
-    $header.= tableHeader($program_names);
-    $body.= tableBuilder($total[0], $total[1], $total[2]);
-    print $header . $body . $footer;
+    //process header for program names
+    $header .= tableHeader($program_names);
+
+    // include totals line if it was included in the data
+    if ($total) $body .= tableBuilder("Total", $total[0], $total[1]);
+
+    // return the entirty of html table
+    return $header . $body . $footer;
 }
 
 ?>

@@ -1,16 +1,12 @@
 <?php
 /**
- * @method array dataReader(array $data)
+ * @method array dataReader(array $data, bool calculateTotals)
  */
 
-function dataReader(array $data)
+function dataReader(array $data, $calculateTotals = true)
 {
 
-    // Used to include totals in result processing
-    $includeProgramTotals = true;
-    $programTotalled = [];
-
-    $results = [];
+    $programTotalled = $results = [];
 
     // Process each item in the input array
     // expects [ String grantee, String program_name, String|float amount]
@@ -35,7 +31,7 @@ function dataReader(array $data)
         $results[$grantee_name][$program_name] = $funding_amount;
 
         // If totals need to be included then track and create entry
-        if ($includeProgramTotals) {
+        if ($calculateTotals) {
             if (!array_key_exists("$program_name", $programTotalled)) {
                 $programTotalled[$program_name] = [];
                 $results['Total'][$program_name] = $funding_amount;
