@@ -40,6 +40,8 @@ function displayReport(array $data)
     // include totals line if it was included in the data
     if ($total) $body .= tableBuilder("Total", $total[0], $total[1]);
 
+    $footer = tableFooter();
+
     // return the entirty of html table
     return $header . $body . $footer;
 }
