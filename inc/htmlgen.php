@@ -5,11 +5,11 @@
  */
 function tableBuilder($grantee, $program, $amount)
 {
-    $str = "<tr>";
-    $str.= "<td>$grantee </td>";
-    $str.= "<td>" . money_format('%.2n', $program) . "</td>";
-    $str.= "<td>" . money_format('%.2n', $amount) . "</td>";
-    $str.= "</tr>";
+    $str = "<tr>\n";
+    $str.= "  <td>$grantee </td>\n";
+    $str.= "  <td>" . money_format('%.2n', $program) . "</td>\n";
+    $str.= "  <td>" . money_format('%.2n', $amount) . "</td>\n";
+    $str.= "</tr>\n";
     return $str;
 }
 
@@ -18,14 +18,14 @@ function tableBuilder($grantee, $program, $amount)
  */
 function tableHeader(array & $program_names)
 {
-    $str = " ";
-    $str.= "<table border='1'><tr>";
-    $str.= "<td width='200px'> </td>";
+    $str = "\n";
+    $str.= "<table border='1'>\n<tr>\n";
+    $str.= "  <td width='200px'> </td>\n";
     foreach($program_names as $k => $program) {
-        $str.= "<td width='200px'> $k </td>";
+        $str.= "  <td width='200px'> $k </td>\n";
     }
 
-    $str.= "</tr>";
+    $str.= "</tr>\n";
     return $str;
 }
 
@@ -34,7 +34,7 @@ function tableHeader(array & $program_names)
  */
 function tableFooter()
 {
-    return " </table>";
+    return "</table>\n";
 }
 
 ?>
