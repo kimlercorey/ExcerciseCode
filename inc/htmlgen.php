@@ -8,12 +8,11 @@ function tableBuilder($grantee, $program_names, $data)
 	//var_dump($data);
     $str = "<tr>\n";
     $str.= "  <td>$grantee </td>\n";
-    //$str.= "  <td>" . money_format('%.2n', $program) . "</td>\n";
-    //$str.= "  <td>" . money_format('%.2n', $amount) . "</td>\n";
+
     foreach($program_names as $k => $program) {
-    	//print ("$grantee - $k / $data[$grantee][$k]");
+
     	if (isset($data[$grantee][$k])) {
-        $str.= "  <td> ". $data[$grantee][$k] ."</td>\n";
+        $str.= "  <td> ". money_format('%.2n', $data[$grantee][$k]) ."</td>\n";
     	} else {
     		$str.= "  <td> 0.00</td>\n";
     	}
