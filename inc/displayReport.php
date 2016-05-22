@@ -9,41 +9,70 @@ require_once 'inc/htmlgen.php';
  * 
  *		  array(n) { ["grantee_name"]=> array(n) { ["program_name"]=> float(x) }}
  */
-function displayReport(array $data)
+function displayReport($data)
 {
 
     $total = $program_names = [];
     $header = $body = $footer = null;
 
-    // Sort the data by alpha DESC on keyname
+    // Sort the data by alpha DESC on keyname (grantee)
     ksort($data);
+    
+    // Read though data - get all unigue names
+    $program_names = getProgramsFromGrantee($data);
 
     // Process each grantee
     foreach($data as $grantee => $programs) {
 
     	$line = [];
-        $program_names = $programs; //i.e. store keys - "Find More Brains", "Drink More Water"
+        //$program_names = $programs; //i.e. store keys - "Find More Brains", "Drink More Water"
     	
     	// Process each program_name
-    	foreach($programs as $program_amount) {
+    	foreach($programs as $program_name => $program_amount) {
         	array_push($line, $program_amount);
+
+        	// Add any new program names to list of names
+        	if (!isset($program_names[$program_name])) $program_names[$program_name] = 1;
         }
 
-        // Send each line to builder unless it is a total line item 
-        ($grantee != "Total") ? $body.= tableBuilder($grantee, $line[0], $line[1]) : $total = $line;
+        // Set any null amounts to 0
+        if (!isset($line[1])) $line[1] = '0.00';
+
+        // Save total line items for later otherwise use it
+        ($grantee != "Total") ? $body.= tableBuilder($grantee, $program_names, $data) : $total = $line;
         
     }
 
-    //process header for program names
+    // Process header for program names
     $header .= tableHeader($program_names);
 
-    // include totals line if it was included in the data
-    if ($total) $body .= tableBuilder("Total", $total[0], $total[1]);
+    // Include totals line if it was included in the data
+    if ($total) $body .= tableBuilder("Total", $program_names, $data);
 
     $footer = tableFooter();
 
-    // return the entirty of html table
+    // return the entirety of html table
     return $header . $body . $footer;
 }
+
+
+/**
+ * @method Array getProgramsFromGrantee(array $arr)
+ * 
+ * Returns a list of program names in $arr
+ */
+function getProgramsFromGrantee($arr) 
+{
+	$programs = [];
+
+	foreach( $arr as $grantee ) {
+		foreach( array_keys($grantee) as $program ) {   
+			$programs[$program] = true;
+		}
+	}
+	
+	return $programs;
+}
+
 
 ?>

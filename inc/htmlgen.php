@@ -3,20 +3,29 @@
 /**
  * @method String tableBuilder(String $grantee, String $program, String $amount)
  */
-function tableBuilder($grantee, $program, $amount)
+function tableBuilder($grantee, $program_names, $data)
 {
+	//var_dump($data);
     $str = "<tr>\n";
     $str.= "  <td>$grantee </td>\n";
-    $str.= "  <td>" . money_format('%.2n', $program) . "</td>\n";
-    $str.= "  <td>" . money_format('%.2n', $amount) . "</td>\n";
+    //$str.= "  <td>" . money_format('%.2n', $program) . "</td>\n";
+    //$str.= "  <td>" . money_format('%.2n', $amount) . "</td>\n";
+    foreach($program_names as $k => $program) {
+    	//print ("$grantee - $k / $data[$grantee][$k]");
+    	if (isset($data[$grantee][$k])) {
+        $str.= "  <td> ". $data[$grantee][$k] ."</td>\n";
+    	} else {
+    		$str.= "  <td> 0.00</td>\n";
+    	}
+    }
     $str.= "</tr>\n";
     return $str;
 }
 
 /**
- * @method String tableHeader(array &$program_names)
+ * @method String tableHeader(array $program_names)
  */
-function tableHeader(array & $program_names)
+function tableHeader(array $program_names)
 {
     $str = "\n";
     $str.= "<table border='1'>\n<tr>\n";
