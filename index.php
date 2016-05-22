@@ -29,11 +29,8 @@ require 'inc/data.php';
 require 'inc/dataReader.php';
 require 'inc/displayReport.php';
 
-// Used to store data reader results
-$results[] = array();
-
 // Read grant_funding data into results
-dataReader($grant_funding, $results);
+$results = dataReader($grant_funding);
 
 // Display results
 displayReport($results);
