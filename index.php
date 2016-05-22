@@ -31,11 +31,10 @@ require 'inc/displayReport.php';
 
  /*
   * Read grant_funding data into results
-  *	or $results = dataReader($grant_funding, false); 
+  *	or dataReader($grant_funding, false); 
   * if you do not wish to calculate totals for data)
   */
-$results = dataReader($grant_funding);
 
 // Display results
-print displayReport($results);
+print displayReport(dataReader($grant_funding));
 ?>
