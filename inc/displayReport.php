@@ -25,7 +25,6 @@ function displayReport($data)
     foreach($data as $grantee => $programs) {
 
     	$line = [];
-        //$program_names = $programs; //i.e. store keys - "Find More Brains", "Drink More Water"
     	
     	// Process each program_name
     	foreach($programs as $program_name => $program_amount) {

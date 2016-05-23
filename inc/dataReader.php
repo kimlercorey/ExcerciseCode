@@ -24,7 +24,7 @@ function dataReader(array $data, $calculateTotals = true)
         If there is isnt an entry for the school already - we may want to change that.
         */
 
-        // If this school has not been added to the results array, then add it
+        // If this grantee has not been added to the results array, then add it
         if (!array_key_exists($grantee_name, $results)) $results[$grantee_name] = [];
 
         // Create an entry for each $program_name with $funding_amount in each $grantee_name

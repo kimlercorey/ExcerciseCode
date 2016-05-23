@@ -34,7 +34,43 @@ require 'inc/displayReport.php';
   *	or dataReader($grant_funding, false); 
   * if you do not wish to calculate totals for data)
   */
+?>
 
+<!-- example css --> 
+<style>
+
+table.main {
+    border-collapse: collapse;
+    border-color: grey;
+    font-family: 'Arial', 'Helvetica';
+    border: 1px solid black;
+    padding: 3px;
+}
+
+.main td {
+	width: 220px;
+	padding: 3px;
+}
+
+.main tr:hover {
+	background-color: yellow;
+}
+
+.main thead td{
+    text-align: center;
+}
+
+.alpha {
+	text-align: left;
+}
+
+.numeric {
+	text-align: right;
+}
+
+</style>
+
+<?php
 // Display results
 print displayReport(dataReader($grant_funding));
 ?>
