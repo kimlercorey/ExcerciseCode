@@ -19,7 +19,7 @@ For example, the input:
                  ["Harvard","Drink More Water","30"]];
 	num_rows = 4;
 
-[See live solution run here...](http://kimler.com/ExcerciseCode "Live version")
+[See live solution run here...](http://kimler.com/ExerciseCode "Live version")
 
 Sample data results in:
 
