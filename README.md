@@ -21,6 +21,8 @@ For example, the input:
 
 [See live solution run here...](http://kimler.com/ExerciseCode "Live version")
 
+[See live paginated version here...](http://kimler.com/ExerciseCode/version2 "paginated version")
+
 Sample data results in:
 
 |                    | Find More Brains  | Drink More Water  |
@@ -59,7 +61,7 @@ So that we can finalize our direction I am making the php version (with no frill
 * Node-centric version
 * Additional Error checking
 * Feature to allow multiple entries for a grantee/program name 
-* Feature for pagination (probably the simpliest way would be using one of the jquery auto-magic ones) but the approach could also be handled from the server-side if needed.
+* Feature for pagination (probably the simpliest way would be using one of the jquery auto-magic ones) but the approach could also be handled from the server-side if needed - note (added paginated version) [See live paginated version here...](http://kimler.com/ExerciseCode/version2 "paginated version").
 * Any other features that would be good to see
 
 
